@@ -1,12 +1,29 @@
 <div class="container">
   <h1>User Settings</h1>
 
-  {{ f.value | json }}
-  <form #f="ngForm">
+  {{ form.value | json }}
+  <form #form ="ngForm" (ngSubmit)="onSubmit(form)">
     <div class="form-group">
       <label for="name">Name</label>
-      <input id="name" name="name" class="form-control" [(ngModel)]="userSettings.name"/>
+      <input
+        id="name"
+        name="name"
+        class="form-control"
+        required
+        #nameField="ngModel"
+        [(ngModel)]="userSettings.name"
+        [class.field-error]="form.submitted && nameField.invalid"
+        (blur)="onBlur(nameField)"
+        />
     </div>
+
+    <div
+      [hidden]="!form.submitted || nameField.valid "
+      class="alert alert-danger"
+    >
+      Enter a name
+    </div>
+
     <div class="form-check form-group">
       <input
         class="form-check-input"
@@ -15,7 +32,7 @@
         id="emailOffers"
         name="emailOffers"
         [(ngModel)]="userSettings.emailOffers"
-        />
+      />
       <label class="form-check-label" for="emailOffers">
         Email Special Offers
       </label>
@@ -43,7 +60,7 @@
           id="MediumInterface"
           value="medium"
           [(ngModel)]="userSettings.interfaceStyle"
-          />
+        />
         <label class="form-check-label" for="MediumInterface"> Medium </label>
       </div>
       <div class="form-check">
@@ -54,13 +71,18 @@
           id="darkInterface"
           value="dark"
           [(ngModel)]="userSettings.interfaceStyle"
-          />
+        />
         <label class="form-check-label" for="darkInterface"> Dark </label>
       </div>
     </div>
     <div class="form-group">
       <label for="subscriptionType">Subscription Type</label>
-      <select class="form-control" id="subscriptionType" name="subscriptionType"  [(ngModel)]="userSettings.subscriptionType">
+      <select
+        class="form-control"
+        id="subscriptionType"
+        name="subscriptionType"
+        [(ngModel)]="userSettings.subscriptionType"
+      >
         <option value="monthly">Monthly</option>
         <option value="annually">Annually</option>
         <option value="lifetime">Lifetime</option>
