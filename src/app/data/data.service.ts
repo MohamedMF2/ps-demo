@@ -8,7 +8,13 @@ import { UserSettings } from './user-setting';
 })
 export class DataService {
 
+  private subscriptionTypes = ['one', 'two', 'three'];
+
   constructor(private http: HttpClient) { }
+
+  getSubscriptionTypes(): Observable<string[]> {
+    return of(['Monthly', 'Yearly', 'LifeTime']);
+  }
   postUserSettingsForm(userSettings: UserSettings): Observable<any> {
 
     return this.http.post('https://putsreq.com/lPtHES0DUECbM0Jr0Q0J', userSettings);
