@@ -20,14 +20,17 @@ export class UserSettingFormComponent implements OnInit {
   };
 
   userSettings: UserSettings = { ...this.originalUserSettings };
+  singleModel = "on";
+  startDate: Date;
   postError = false;
   postErrorMessage = '';
-  subscriptionTypes :Observable<string[]>;
+  subscriptionTypes: Observable<string[]>;
 
   constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
     this.subscriptionTypes = this.dataService.getSubscriptionTypes();
+    this.startDate = new Date();
   }
   onHttpError(errorResponse: any) {
     console.log('onHttpError error:', errorResponse);
