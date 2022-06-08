@@ -56,12 +56,26 @@
         -->
     </div>
     <div class="form-group">
-
       <label for="startDate">Start date</label>
       <input id="startDate" type="text" placeholder="start date" name="startDate" [(ngModel)]="startDate"
         class="form-control" bsDatepicker>
     </div>
-    
+
+    <div class="form-group">
+      <label for="startTime">Start Time</label>
+      <timepicker id="startTime" [(ngModel)]="startTime" name="startTime"></timepicker>
+      <pre class="alert alert-info">Time is: {{ startTime }}</pre>
+    </div>
+
+    <div class="form-group">
+      rating
+      <rating [(ngModel)]="rate" name="rate"></rating>
+
+      <div class="card">
+        <pre class="card-block card-header" style="margin:15px 0;">Rate: <b>{{rate}}</b></pre>
+      </div>
+    </div>
+
     <div class="form-group">
       <label for="subscriptionType">Subscription Type</label>
       <select class="form-control" id="subscriptionType" name="subscriptionType"
